@@ -1,0 +1,279 @@
+================================================================
+UCLA GRADUATE CAREER SERVICES
+Resume + Cover Letter Guide (Winter 2026)
+Source: 26W-GCS-Resume-Cover-Letter-Slides-Website.pdf
+Contacts: Eddie Cleofe (Masters) ecleofe@career.ucla.edu
+          Gaby Barrios (STEM PhD) gbarrios@career.ucla.edu
+          Erin Brown (HASS PhD) ebrown@career.ucla.edu
+================================================================
+
+
+================================================================
+PART 1: RESUME
+================================================================
+
+WHAT IS A RESUME?
+- Focused summary of RELEVANT skills and experiences for a specific role
+- Read by AI first, then people: ATS (Applicant Tracking System) → HR → Hiring Manager/Committee
+- Purpose: to decide WHO TO INTERVIEW
+- Average hiring manager spends 7 SECONDS on a first pass
+
+RESUME vs CV
+- CV: academics/researchers, unlimited length, complete academic history
+- Resume: employers, 1-2 pages, snapshot of most relevant work experiences
+- Resume excludes: full publication lists, non-relevant experiences or accomplishments
+
+----------------------------------------------------------------
+FORMAT
+----------------------------------------------------------------
+- Look: standard/boring
+- Length: 1 page (rarely 2), margins 0.5–0.75 inches
+- Font: Helvetica or Calibri, 10–12pt content, larger for headings/name
+- Bold, underlined, italicized: sparingly, for effect only
+- Abbreviations/acronyms: ok when previously defined
+- Dates: on the right-hand side
+- Be consistent: titles, organizations, abbreviations, dates
+- Bullets: start with action verbs
+
+----------------------------------------------------------------
+COMMON SECTIONS (order = most relevant info first)
+----------------------------------------------------------------
+1. Contact Information
+   - Name, email, LinkedIn, website, GitHub, city, phone
+
+2. Education
+   - School & program
+
+3. Experience
+   - Reverse chronological (or functional / hybrid)
+
+4. Skills
+   - Grouped by themes (Technical, Management, etc.)
+
+5. Role-Relevant Content (pick what applies)
+   - Selected Projects
+   - Certifications
+   - Presentations
+   - Publications
+   - Leadership/Service
+   - Honors & Awards
+
+Example section order for STEM/tech:
+  Education > Technical Skills > Professional Experience > Selected Projects
+
+DO NOT include: photo, age, race, sex, height, weight, nationality, marital status
+
+----------------------------------------------------------------
+STRATEGY 1: GOOGLE XYZ APPROACH
+----------------------------------------------------------------
+Format: "Accomplished [X] as measured by [Y], by doing [Z]."
+  - X = achievement
+  - Y = success metric
+  - Z = action(s) you took
+  - Does not need to be in XYZ order or include all three
+
+Key rule: communicate specific achievements/strengths, NOT generic job responsibilities
+
+Examples:
+  Weak:  "Managed 3 social media channels"
+  Better: "Managed 3 social media channels and increased follower count by 36%"
+  Best:   "Led short-form video development for 3 social channels and increased follower count by 36%"
+
+  Weak:  "Produced weekly reports for clients"
+  Better: "Produced weekly reports for clients and increased client satisfaction ratings by 30%"
+  Best:   "Created automated client dashboards and support documents, produced weekly reports for clients, and increased client satisfaction ratings by 30%"
+
+----------------------------------------------------------------
+STRATEGY 2: QUANTIFYING WORK
+----------------------------------------------------------------
+Why:
+- Average recruiter spends ~7 seconds; ATS spends even less
+- Eyes are drawn to digits, especially $ or %
+- Concretizes abstract work
+- Demonstrates your contribution to organizations
+
+How (elements you can quantify):
+- Budget/Money
+- People
+- Time/Hours
+
+Start keeping records NOW — useful for resumes, cover letters, LinkedIn, interviews.
+
+----------------------------------------------------------------
+STRATEGY 3: RESUME TAILORING
+----------------------------------------------------------------
+Step 1: Identify bullet points/functions/qualifications in the JD your skills speak to
+Step 2: Use language FROM the job description to rewrite about your skills
+Step 3: Make bullet points achievement-focused and/or quantitative
+
+Example:
+  JD requirement: "Ability to effectively communicate complex information to diverse audiences"
+  Original:  "Presented at weekly lab meetings and conferences"
+  Tailored:  "Communicated research results quarterly to diverse audiences ranging from 10–100+ people for lab meetings, conferences, and public outreach events"
+
+----------------------------------------------------------------
+STRATEGY 4: RESUME TAILORING SYSTEM (3-layer approach)
+----------------------------------------------------------------
+Layer 1: Write a "Comprehensive Resume"
+  - All possible experiences, many bullet points, includes achievements outside core responsibilities
+
+Layer 2: Create One Resume Per Role Type
+  - Emphasize relevant info, remove irrelevant info, from the comprehensive resume
+  - Example: separate teaching resume and marketing resume
+
+Layer 3: Tailor "Type Resumes" to Specific Jobs
+  - Review JD for qualifications phrased in different ways (teamwork vs. collaboration)
+  - Highlight these keywords in your resume
+  - When applying, find these keywords and update your resume
+
+----------------------------------------------------------------
+STRATEGY 5: AI TAILORING
+----------------------------------------------------------------
+Multi-prompt method:
+  1. Add job description to the AI tool
+  2. Prompt 1: "Identify key skills and keywords recruiters would look for — rank by importance"
+  3. Prompt 2: "Revise this resume emphasizing those skills and keywords"
+  4. CHECK accuracy and language of results — iterate and edit
+
+Important: always verify AI output for accuracy. Hand-tailoring for roles you're very interested in is also free interview prep.
+
+----------------------------------------------------------------
+BULLET SELF-CHECK QUESTIONS
+----------------------------------------------------------------
+- Does this "answer the prompt" of the job description?
+- Does it emphasize my work, its scale, and/or its impact?
+- Does it demonstrate what I can do and why it is valuable?
+
+----------------------------------------------------------------
+RESUME MISTAKES TO AVOID
+----------------------------------------------------------------
+- Including irrelevant experiences
+- Including irrelevant PARTS of experiences
+- Listing job responsibilities instead of contributions (not achievement-focused or quantitative)
+
+
+================================================================
+PART 2: COVER LETTER
+================================================================
+
+WHAT IS A COVER LETTER?
+An opportunity to "connect the dots" between your experiences and this role using specific examples.
+
+----------------------------------------------------------------
+FORMAT
+----------------------------------------------------------------
+- Length: 1 page
+- Margins: 0.5–0.75 inches
+- Font: Helvetica or Calibri, 10–12pt
+- Use same heading as resume to create cohesive "letterhead"
+- Salutation: "Dear Hiring Manager:" or "Dear Hiring Team:" if no contact name
+- Close: type your name, optionally include digital signature
+
+----------------------------------------------------------------
+STRUCTURE
+----------------------------------------------------------------
+1. Intro Paragraph
+   - State the role you are applying for and how you found it
+   - Mention any referrals
+   - Close with a thesis statement: 1–3 strengths that make you a strong fit
+   - Focus on non-technical skills NOT highlighted in resume
+
+2. Body Paragraph(s) — one per strength named in intro
+   - Use a specific example/story to demonstrate success in that strength
+   - Use CART framework (see below)
+   - Be specific about how you fit the position and organization
+
+3. Closing Paragraph
+   - Thank reader for their time
+   - Summarize your unique skill set (avoid redundancy)
+   - Express eagerness/interest in speaking further
+   - Leave a confident last impression
+
+----------------------------------------------------------------
+CHOOSING STRENGTHS & STORIES
+----------------------------------------------------------------
+- Provide context and IN-DEPTH examples of skills, knowledge, experience, and fit
+- Focus on 2–3 needs in the JD
+- SHOWCASE STRENGTHS NOT EASILY DESCRIBED IN A BULLET POINT
+- Emphasize how your skills and experiences align with the role
+- Express enthusiasm for the position and organization
+- Demonstrate understanding of their mission, vision, needs, and accomplishments
+
+----------------------------------------------------------------
+CART STORY FRAMEWORK (for body paragraphs)
+----------------------------------------------------------------
+For each paragraph, answer each with 1–2 sentences:
+
+C - Context:   What role were you in and what were you working on?
+A - Action:    What step(s) did you take to achieve positive results?
+R - Result:    How did you positively impact your team, org, or project?
+T - Takeaway:  How is this relevant to the role you are applying to?
+
+Example (CART in action):
+  "In my role as a Fancy Program Teaching Fellow, I worked closely with a group of 6 other teachers
+  with different academic backgrounds. [C]
+  Through this collaboration, I developed curricula for remote learning and web/social media content.
+  With insight from my colleagues in the ecological sciences, I implemented grade level-appropriate
+  interactive activities to demonstrate the relationship between climate change, agriculture, and food
+  inequity. [A]
+  Through this work, we won the Fancy Program Innovation award. [R]
+  My skill in collaborating across disciplines would be invaluable to the deeply interdisciplinary
+  research of the Global Social Policy Center." [T]
+
+----------------------------------------------------------------
+MODULAR COVER LETTER STRATEGY (efficient approach)
+----------------------------------------------------------------
+1. Write an extra-long cover letter by reviewing multiple relevant JDs and identifying:
+   - 3–5 soft skills common across roles
+   - 1–3 hard skills common across roles
+   - Write a CART-style body paragraph for each
+
+2. Create a modular template:
+   - Write an intro + closing with JOB TITLE, ORGANIZATION, ROLE SOURCE, and KEY TRAITS clearly highlighted as placeholders
+   - Mix and match role-relevant body paragraphs
+   - Update intro/closing to produce each new cover letter
+
+----------------------------------------------------------------
+COVER LETTER MISTAKES TO AVOID
+----------------------------------------------------------------
+- Being redundant with the resume (cover letter is almost always read AFTER the resume)
+- Not introducing new information (this is why AI alone produces bad cover letters)
+- Not including specific examples demonstrating strengths, actions, and results
+- Not submitting a cover letter at all
+
+----------------------------------------------------------------
+INTRO PARAGRAPH EXAMPLE
+----------------------------------------------------------------
+"Dear Hiring Manager,
+
+I am very excited to apply to the Senior Writer/Editor position for the Global Social Policy Center,
+especially after learning more about the role from former GSPC staffer Amy Bruno on LinkedIn.
+I am certain that my meticulous attention to detail and my ability to deeply collaborate across
+interdisciplinary teams equip me to excel in this role."
+
+Key elements: role name, organization, referral source, 2 key traits as thesis.
+
+CLOSING PARAGRAPH EXAMPLE:
+"I appreciate your time in reviewing my application. I believe that the combination of my attention
+to detail and my ability to deeply collaborate across interdisciplinary teams would be ideal for
+this position. I look forward to meeting with you."
+
+================================================================
+UCLA GRADUATE CAREER SERVICES RESOURCES
+================================================================
+Website:   career.ucla.edu
+Instagram: @uclagcs
+LinkedIn:  UCLA Graduate Career Services
+
+Services available:
+- One-on-one appointments: Resume/Cover Letter, Interview Prep, Negotiation
+- Workshops: Job Search Strategy, LinkedIn + Networking, Interviews, Negotiation
+- Alumni/Employer events: Careers & Coffee, Roundtables, Info Sessions
+- GCS Master's Resume Book (highlighted as key resource)
+- GCS PhD Resume Book (highlighted as key resource)
+- GCS Cover Letter Template + Examples
+- CART Worksheet + Story Toolbox Template
+
+Contact for Masters students: Eddie Cleofe, PhD — ecleofe@career.ucla.edu
+Contact for STEM PhD students: Gaby Barrios, PhD — gbarrios@career.ucla.edu
+Contact for HASS PhD students: Erin Brown, PhD — ebrown@career.ucla.edu

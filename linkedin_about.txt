@@ -1,0 +1,72 @@
+========================================
+LINKEDIN ABOUT
+========================================
+
+Full-stack software engineer moving into AI engineering, with a strong production systems foundation.
+
+I spent the past year as the sole engineer on backend systems at Intrising Networks: a concurrent test-editing platform in Go and PostgreSQL, a real-time WebSocket broadcast pipeline, and a security-certified switch management interface across four product lines.
+
+On the ML side, I trained a 27-model SciBERT-based ensemble achieving 96.9% top-5 accuracy across 378 academic journals, combining domain-specific abstract classifiers with a dynamic accuracy-weighted voting system.
+
+Incoming Master of Engineering in Artificial Intelligence at UCLA (September 2026). Relocating to Los Angeles. Open to AI engineer roles in the US.
+
+
+========================================
+LINKEDIN HEADLINE
+========================================
+
+Full-Stack Software Engineer | Incoming UCLA MEng AI | Open to AI Engineer Roles
+
+
+========================================
+EXPERIENCE: Intrising Networks, Inc.
+Full-Stack Software Engineer | June 2025 – June 2026
+========================================
+
+Sole engineer on AutoPVT, a concurrent test-editing platform (Go / gRPC / PostgreSQL / Vue 3) used by ~30 engineers; owned IEC 62443-4-2 SL3 authentication and session control certification across four product lines.
+
+Key contributions:
+
+• Designed a two-tier PostgreSQL locking model for concurrent test editing: exclusive advisory locks with compare-and-bump revision checks for structural writes, shared locks with per-field merging for fills, so concurrent editors on different fields never blocked each other.
+
+• Eliminated dirty-state broadcasts by enforcing commit-before-broadcast ordering: write and audit entry committed atomically in a single PostgreSQL transaction, WebSocket broadcast fired only on gRPC success acknowledgment, so the push channel could never deliver state from a rolled-back transaction.
+
+• Led IEC 62443-4-2 SL3 authentication and session control for four product lines: added TOTP-based MFA via a custom PAM conversation handler and enforced per-user per-interface concurrent session limits across web, CLI, and Telnet through a shared internal gRPC service.
+
+• Cut Firebase costs from $300/month to zero by tracing a spike to a 70 MB firmware collection inflated by an embedded log field and 4 redundant per-page listeners re-fetching it on every navigation; restructured into a lazy-loaded sibling node (70 MB → 5 MB, 93% reduction) and consolidated to one global Vuex listener.
+
+• Reduced CI build time by over 80% by scoping SVG asset compilation to per-product allowlists and replacing a parallel task runner that silently continued despite worker failures with a fail-fast orchestrator that surfaced errors immediately.
+
+Stack: Go · gRPC · Protocol Buffers · PostgreSQL · Vue 3 · AngularJS · TypeScript · Node.js · Firebase · Google Cloud Platform · Docker · CGO · PAM
+
+Skills to add: Go · PostgreSQL · gRPC · TypeScript · Vue.js · Node.js · AngularJS · JavaScript · Firebase · Google Cloud Platform · Docker · WebSocket · Linux · CI/CD
+
+
+========================================
+EXPERIENCE: Texim Europe B.V.
+Full-Stack Software Engineer Intern | April 2023 – July 2023
+========================================
+
+Eliminated Texim's reliance on an end-of-life ETL platform (SQL Server 2000 DTS, unable to receive security patches) by building a C# WinForms replacement: a VBScript package editor, scheduler with daily/weekly/monthly recurrence, and multithreaded Windows service for automated execution, migrating the company's full script library without rewrites.
+
+Skills to add: C# · Microsoft SQL Server · ETL
+
+
+========================================
+PROJECT: Natural Language Processing for Journal Publication Selection
+Machine Learning Engineer | September 2023 – November 2023 | Team of 4
+========================================
+
+Achieved 96.9% top-5 accuracy across 378 journals by designing and training 27 models: 26 domain-specific SciBERT abstract classifiers and 1 subject area classifier, combined with a dynamic accuracy-weighted ensemble, validated on a held-out test set of 3,000 abstracts.
+
+Skills to add: Python · PyTorch · HuggingFace Transformers · SciBERT · Natural Language Processing · Machine Learning · Flask
+
+
+========================================
+PROJECT: Rosenxt Group - Underground Water Pipeline Inspection Application
+Front-End Software Engineer | January 2024 – April 2024 | Team of 5
+========================================
+
+Led frontend development in React, independently owning five core pages (login, profile, user management, marker management, map settings) and collaborating on pipeline management and sidebar components. Secured multi-user access by implementing Role-Based Access Control with session management across three permission levels, restricting feature visibility and data access by stakeholder role.
+
+Skills to add: React · JavaScript · Leaflet · Role-Based Access Control (RBAC)
