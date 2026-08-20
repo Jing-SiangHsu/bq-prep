@@ -272,6 +272,118 @@ Cost went from $300/month to within the free tier, with no RTDB line item. The f
 
 ---
 
+## Adaptive Ad Recommender
+
+*One-time context:*
+Adaptive Ad Recommender is a personal project I've been building since July 2026, a two-sided ad-recommendation system where advertisers submit campaigns that go through LLM-based policy review, and the system serves the most relevant eligible campaign to a user based on their profile, learning from feedback over time. Stack: FastAPI/Python backend, Postgres as the source of truth, Kafka+Debezium for change-data-capture into Pinecone, Redis for job queueing and rate limiting, OpenAI API for the LLM surfaces, Google OIDC for auth. Solo project, no team.
+
+---
+
+### AAR-1: Kafka + Debezium CDC pipeline
+
+**S — Situation:**
+Campaign eligibility (status, budget) lives in Postgres, but serving needs to filter and rank eligible campaigns via Pinecone's vector search. A naive dual-write (write Postgres, then separately write Pinecone) has two independent points of failure: if the Postgres write succeeds but the Pinecone write silently fails, Pinecone drifts out of sync and could keep serving an already budget-exhausted campaign.
+
+**T — Task:**
+I needed a way to keep Pinecone's eligibility data converged with Postgres without a second manual write path, and specifically one that preserved the order events happened in, since two budget-debit events on the same campaign applied out of order could leave a depleted campaign servable.
+
+**A — Action:**
+I built a Kafka (KRaft mode) and Debezium change-data-capture pipeline: the app only ever writes to Postgres, Debezium watches Postgres's own change log, and a Kafka consumer propagates every change into Pinecone. I chose Kafka specifically for its per-partition ordering guarantee, partitioned by campaign_id — Redis/RQ (already used elsewhere in the app for campaign review) has no such guarantee, so it wasn't a fit here even though it's the right tool for other jobs in the same codebase. While building this I also found and fixed two smaller issues with real measurements behind them: a Pinecone client object was being reconstructed on every call instead of cached, a one-line fix measured at 2.4-2.9x speedup on non-embedding writes; and a defensive oversampling multiplier on retrieval turned out unnecessary, something I only trusted after my first stress test (an unrealistic 49% catalog churn burst at the wrong batch size) gave a misleading answer, and I reran it at realistic churn before removing the multiplier.
+
+**R — Result:**
+Postgres stays the single source of truth for eligibility; Pinecone converges from the CDC log rather than a second manual write, removing the class of bug where the two silently disagree.
+
+**Probes:**
+
+- *"Why not just add a database index or optimize the dual write?"*
+  The problem isn't write speed, it's that two independent writes have two independent chances to fail, with no way to guarantee "both succeeded or neither did" across two different databases. CDC sidesteps this: there's only one write, to Postgres, and Pinecone converges from a durable, ordered log of what changed.
+
+- *"What if the Kafka consumer falls behind?"*
+  There's a dead-letter topic for malformed events so a single bad message doesn't block the partition, and consumer-group lag is self-logged so a growing backlog is visible rather than silent.
+
+- *"Walk me through why the first oversample test was misleading."*
+  I tested at 49% catalog churn in one burst, at the wrong batch size for how the app actually queries — it looked like it justified keeping a 3x oversample margin. Rerunning at realistic churn and the real batch size showed the margin caught nothing, zero trims across the test run, so I removed it rather than keep "free insurance" that wasn't actually free or necessary.
+
+---
+
+### AAR-2: Postgres advisory-lock leak from ORM connection churn
+
+**S — Situation:**
+Two concurrent reactions from the same user could both read the same starting profile vector before either write landed, so the second write would silently clobber the first's update. Pinecone has no atomic read-modify-write primitive.
+
+**T — Task:**
+I needed external coordination to serialize the fetch-and-write per user, and I ended up also needing to diagnose a subtle bug in my own fix once it went live.
+
+**A — Action:**
+I used a Postgres session-level advisory lock keyed on user_id to serialize the update, verified with a real two-thread test I confirmed actually caught the race by removing the lock and watching the test fail. But the fix had a bug: the locked region contained a database commit partway through, and SQLAlchemy's ORM session releases its connection back to the pool on commit, checking out a connection, not necessarily the same one, for the next statement. Postgres advisory-lock release is scoped to the specific connection that acquired it, so an unlock landing on a different connection silently no-opped, and the original connection went back into the pool still holding the lock, invisibly. I caught this because a full test-suite run reproducibly hung forever on a second call for the same user, against a provably clean Postgres I'd confirmed had zero advisory locks right before the run. Checking pg_locks showed one idle connection last-queried COMMIT, still holding the lock, blocking the next acquire. I fixed it with a dedicated context manager that acquires and releases the lock on one connection held open for the entire critical section, independent of the ORM's own connection pool.
+
+**R — Result:**
+The full test suite went from hanging indefinitely to completing all 101 tests in 23 seconds, with zero locks left behind, verified both in the test suite and live through the real API.
+
+**Probes:**
+
+- *"How did you know it was a connection issue and not a real deadlock?"*
+  I checked pg_locks directly and confirmed the lock was held by a connection whose last query was COMMIT, not an active query. A real deadlock would show two connections each waiting on the other; this showed one connection that had already finished its work but never released the lock.
+
+- *"Why not just use a lock with a timeout as a safety net?"*
+  A timeout would have masked the bug rather than fixed it — requests would eventually stop hanging but would fail or retry instead of succeeding, with the underlying leak still there.
+
+- *"Would this bug happen with row-level locks instead of advisory locks?"*
+  No — row-level locks release automatically on commit or rollback regardless of which connection issues it. This failure mode is specific to advisory locks because Postgres deliberately makes them independent of transactions, the same property that made them right for the original race.
+
+---
+
+### AAR-3: Google OIDC auth
+
+**S — Situation:**
+The app started with zero authentication — every endpoint trusted a caller-supplied user_id with no verification, so any request could impersonate any user or approve/reject any campaign with no access control.
+
+**T — Task:**
+I needed real identity verification and a way to revoke sessions, without trusting a third party's token directly or exposing a long-lived credential to client-side JavaScript.
+
+**A — Action:**
+I added Google OIDC login: the frontend gets a Google-signed ID token via Google Identity Services, and the backend verifies it against Google's public keys and confirms the aud claim matches this app specifically. After verifying identity, the backend issues its own short-lived JWT access token rather than trusting Google's token directly, so it controls its own session lifetime and role claims. A longer-lived refresh token is tracked server-side in Redis, since a signed JWT can't be un-issued once it exists — Redis is what actually makes logout or rotation revoke something real. The access token lives in localStorage since it's short-lived and low-risk if stolen; the refresh token lives in an httpOnly cookie, out of reach of client-side JavaScript.
+
+**R — Result:**
+Every endpoint now requires a verified identity, and roles (end_user, advertiser, moderator) are checked separately from authentication, so "who is this" and "what can they do" are two distinct, composable checks.
+
+**Probes:**
+
+- *"Why not just use Google's token directly instead of issuing your own JWT?"*
+  Google's token is scoped to Google's own session semantics, not this app's. Issuing my own JWT means I control expiry, claims, and what happens on logout, independent of Google's side.
+
+- *"Why split access and refresh tokens instead of one long-lived token?"*
+  A single long-lived token that's stolen is a long-lived vulnerability with no way to revoke it short of rotating the signing secret for everyone. Splitting them keeps the genuinely dangerous one (the refresh token) out of JavaScript's reach and individually revocable server-side.
+
+---
+
+### AAR-4: Adversarial prompt-injection testing
+
+**S — Situation:**
+I'd built two LLM-facing surfaces, a campaign policy reviewer and an onboarding checkpoint judge, both taking attacker-controlled text as input. A mocked test proves nothing about whether the real model resists a real attack.
+
+**T — Task:**
+I needed to actually find out whether these surfaces could be manipulated by crafted input, and fix whatever I found, using real, unmocked calls to the model rather than assumptions.
+
+**A — Action:**
+I wrote crafted injection attempts against both surfaces: fake "SYSTEM OVERRIDE" instructions, claims of pre-approval, fabricated conversation history claiming a step already happened. The first run found real, reproducible vulnerabilities on both. For the policy reviewer, two different injections (forced approval, suppressed exclusions) succeeded non-deterministically; adding explicit instruction-vs-data framing to the system prompt fixed both, clean across every follow-up run. For the onboarding checkpoint judge, the same class of fix did not work: an injected override on vague input and a fabricated fake history turn both still succeeded every run, even with equivalent framing. Since prompt hardening alone wasn't sufficient there, I added a real deterministic backstop instead: a length floor before any interest summary gets embedded and persisted as a profile vector, closing the concrete harm even though the judge's raw output is still technically manipulable. One of the two known issues on that surface still has no fix, deliberately: fabricated history can make the judge think onboarding already finished, but fixing it properly would require server-side session state to verify a round actually happened, which conflicts with the app's intentionally stateless design. I left it open and tracked rather than rush a fragile patch.
+
+**R — Result:**
+Two of two tested policy-review injection paths are fully closed. One onboarding vulnerability has a real deterministic backstop closing its concrete harm. One remains open by deliberate choice, tracked with an explicit written reason rather than hidden.
+
+**Probes:**
+
+- *"How do you know your test suite itself isn't unreliable, since it's calling a real LLM?"*
+  Where the check is a literal field value, the assertion is deterministic, no LLM judging involved. Only the two checks that are inherently semantic route through a small LLM-as-judge helper, and that helper is itself hardened against the same injected text it's evaluating.
+
+- *"Is the campaign reviewer an actual agent?"*
+  Only in the tool-calling loop added afterward, where it can query a real Postgres table for an advertiser's history on borderline cases — that's custom code my own process executes across multiple turns. The earlier web-search-only version isn't an agent by any meaningful definition, since OpenAI runs that tool server-side within a single call, with no loop my own code drives.
+
+- *"Why leave the fabricated-history vulnerability open instead of fixing it?"*
+  The real fix requires adding server-side session state to verify a prior round genuinely happened, and this app is deliberately stateless today. Adding that state is an architecture decision with real trade-offs, not something to bolt on hastily. The harm from leaving it open is also low severity — onboarding ends a little early with friendly messaging, not data corruption — so the risk didn't justify rushing a fragile fix.
+
+---
+
 ## Texim Europe
 
 *One-time context:*
