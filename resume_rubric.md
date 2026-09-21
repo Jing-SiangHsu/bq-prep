@@ -71,9 +71,11 @@ Based on UCLA GCS Resume + Cover Letter Guide (Winter 2026) + FAANG+ hiring sign
 | # | Bullet (summary) | V | A | M | Z | X | GCS | S | O | D | R | FAANG | Total |
 |---|-----------------|---|---|---|---|---|-----|---|---|---|---|-------|-------|
 | 1 | Cut $300/month Firebase to free tier, 70 MB → 5 MB, 93% | 1 | 2 | 2 | 1 | 2 | **8** | 2 | 1 | 1 | 1 | **5** | **13** |
+| 2 | Access-control gap: firmware log exposed to non-admin roles | 1 | 0 | 0 | 1 | 1 | **3** | 2 | 1 | 1 | 0 | **4** | **7** |
 
 **Notes:**
-- Tied for highest combined score. Business metric up front ($300/month → free tier) plus 93% size reduction. M=2. Two fixes named: lazy-loaded sibling node and listener consolidation. R=1 (listener stacking implies architecture insight). S=2 because cloud cost is production/external. Only gap: O=1 (role implied, not stated as "sole").
+- #1: Tied for highest combined score. Business metric up front ($300/month → free tier) plus 93% size reduction. M=2. Two fixes named: lazy-loaded sibling node and listener consolidation. R=1 (listener stacking implies architecture insight). S=2 because cloud cost is production/external. Only gap: O=1 (role implied, not stated as "sole").
+- #2: 5/5 independent FAANG-persona reviewers recommended **cutting from the 1-page resume** — textbook "found and fixed a single bug in my own code" (surfaced incidentally while restructuring data for #1, not from a deliberate security-testing practice). M=0 (no metric) and R=0 (no stated design reasoning) confirm it structurally. S=2 only because InTriHub itself has external partner users, not because the fix is hard. Kept in `resume_comprehensive.md` as interview-prep material, removed from `resume_sde.md`.
 
 ---
 
@@ -125,7 +127,7 @@ Based on UCLA GCS Resume + Cover Letter Guide (Winter 2026) + FAANG+ hiring sign
 | **11** | SM #1, SM #2, SM #4 |
 | **10** | AutoPVT #2, AutoPVT #3, Texim #1, NLP #2, Rosenxt #2 (RBAC) |
 | **8** | Rosenxt #1 (frontend) |
-| **7** | Texim #2 |
+| **7** | Texim #2, InTriHub #2 (access-control, cut from 1-pager) |
 
 ---
 

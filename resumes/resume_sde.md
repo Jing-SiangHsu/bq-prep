@@ -1,10 +1,10 @@
 **Jing-Siang Hsu**
-Los Angeles, CA • jingsianghsu@gmail.com • (+886) 934129136 • linkedin.com/in/jing-siang-hsu • github.com/Jing-Siang
+Los Angeles, CA • jingsianghsu@gmail.com • (213) 331-9601 • linkedin.com/in/jing-siang-hsu • github.com/Jing-Siang
 
 # EDUCATION
 
 **University of California, Los Angeles (UCLA)** | Los Angeles, CA
-Master of Engineering in Artificial Intelligence | September 2026 – September 2027 (Expected)
+Master of Engineering in Artificial Intelligence | September 2026 – December 2027 (Expected)
 
 **University of Twente** | Enschede, NL
 Bachelor's Degree in Technical Computer Science, Cum Laude, GPA: 4.0/4.0 (US equivalent) | September 2021 – July 2024
@@ -38,7 +38,7 @@ Full-Stack Software Engineer | June 2025 – June 2026
 
 **InTriHub** *(Node.js, Firebase Realtime Database, Google Cloud Functions, Vue 2)*
 
-* Cut Firebase costs from **$300/month to within Firebase's free tier** by tracing the spike to a 70 MB firmware collection inflated by an embedded log field and 4 redundant per-page listeners re-fetching it on every navigation, restructuring it into a lazy-loaded sibling node (70 MB to 5 MB, 93% reduction) and consolidating to one global Vuex listener.
+* Cut Firebase costs from **$300/month to within Firebase's free tier** by tracing the spike to a 70 MB firmware collection inflated by an embedded log field and 3 redundant per-page listeners re-fetching it on every navigation, restructuring it into a lazy-loaded sibling node (70 MB to 5 MB, 93% reduction) and consolidating to one global Vuex listener.
 
 ---
 

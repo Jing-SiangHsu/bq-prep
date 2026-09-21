@@ -1,10 +1,10 @@
 **Jing-Siang Hsu**
-Los Angeles, CA • jingsianghsu@gmail.com • (+886) 934129136 • linkedin.com/in/jing-siang-hsu • github.com/Jing-Siang
+Los Angeles, CA • jingsianghsu@gmail.com • (213) 331-9601 • linkedin.com/in/jing-siang-hsu • github.com/Jing-Siang
 
 # EDUCATION
 
 **University of California, Los Angeles (UCLA)** | Los Angeles, CA
-Master of Engineering in Artificial Intelligence | September 2026 – September 2027 (Expected)
+Master of Engineering in Artificial Intelligence | September 2026 – December 2027 (Expected)
 
 **University of Twente** | Enschede, NL
 Bachelor's Degree in Technical Computer Science, Cum Laude, GPA: 4.0/4.0 (US equivalent) | September 2021 – July 2024
@@ -51,8 +51,12 @@ Full-Stack Software Engineer | June 2025 – June 2026
 
 **InTriHub** *(Node.js, Firebase Realtime Database, Google Cloud Functions, PostgreSQL, Vue 2)*
 
-* Cut Firebase costs from $300/month to within Firebase's free tier by tracing the spike to a 70 MB firmware collection inflated by an embedded log field and 4 redundant per-page listeners re-fetching it on every navigation, restructuring it into a lazy-loaded sibling node (70 MB to 5 MB, 93% reduction) and consolidating to one global Vuex listener.
+* Cut Firebase costs from $300/month to within Firebase's free tier by tracing the spike to a 70 MB firmware collection inflated by an embedded log field and 3 redundant per-page listeners re-fetching it on every navigation, restructuring it into a lazy-loaded sibling node (70 MB to 5 MB, 93% reduction) and consolidating to one global Vuex listener.
   * *GCS 8/8 | FAANG 5/6 | Total 13/14*
+
+* Fixed an access-control gap where an internal firmware log on InTriHub was readable by non-admin roles, including vendor, salesperson, and partner accounts, instead of staying admin-only. (Role-based over-exposure, not cross-tenant leakage between partner orgs, InTriHub's per-partner data isolation elsewhere was unaffected.)
+  * *GCS 3/8 | FAANG 4/6 | Total 7/14 — 5/5 independent FAANG-persona reviewers recommended cutting from the 1-page resume: single bug found incidentally during the cost-optimization work above, not from a deliberate security-testing practice. Kept here as interview-prep material only.*
+  * Source: commit `8e9d5c6` (hub-cloud-function) — tightened RTDB rules restricting `firmwareInternalLog` reads to admin only (was leaking to vendor/salesperson/partner via the firmware node).
 
 ---
 

@@ -1,0 +1,43 @@
+INTRISING NETWORKS
+
+Experience Summary:
+Full-stack engineer at Intrising Networks, a Taiwan-based industrial Ethernet switch maker. Most of my work was frontend, across the switch web UI, an internal test platform, and a firmware portal used by partners, plus backend work on authentication, concurrent editing and performance.
+
+Job Description (one item per bullet field):
+- Built and maintained features in the switch web UI (AngularJS), including a notifications system with slide-in popups, filters, an unread indicator and light and dark themes, plus new configuration pages for industrial protocols and network features such as Modbus, PROFINET, NAT, tunnels and HSR/PRP.
+- Made the switch UI follow user permissions across many pages, and reworked the device panel view so it correctly shows each unit of a stacked switch.
+- Led the login and session security work for the switch management interface (web, CLI and Telnet) to meet the IEC 62443 standard: multi-factor login with QR-code setup, concurrent session limits, and the backend login protocol behind it.
+- Built much of AutoPVT's frontend in Vue 3: the test menu, the test creation wizard with item selection, the results table and the report, plus the admin pages for users, test sites, test items and live tests.
+- Designed how AutoPVT handles many engineers editing the same test at once, including autosave and handling of concurrent edits, so people can work in parallel without overwriting each other.
+- Fixed slow pages, including cutting the test catalog load from 3 to 5 seconds to under 500ms, and contributed shared components (markdown editor, status tags, progress bars) to the company's Vue component library.
+- Main maintainer of InTriHub, a Vue and Firebase portal for firmware and product information used by partners: built its changelog, download, documentation and FAQ pages, added role-based access, and brought Firebase costs from $300 a month down to the free tier.
+
+
+TEXIM EUROPE B.V.
+
+Experience Summary:
+Full-stack engineering intern at Texim Europe, a Dutch distributor of electronic components and industrial computing hardware. I replaced the company's discontinued data-transfer tool with a desktop application for editing, scheduling and running its existing scripts.
+
+Job Description (one item per bullet field):
+- Built a Windows desktop application in C# for editing and managing the company's data-transfer scripts, replacing SQL Server 2000 DTS.
+- Implemented a scheduler with daily, weekly, monthly and "nth weekday" recurrence, email alerts, and job state stored in SQL Server.
+- Built a Windows service that runs scheduled jobs in the background, each on its own thread, so nothing depends on the application being open.
+- Kept the existing VBScript library working unchanged by running scripts through the same Windows Script Host engine, so no scripts had to be rewritten.
+
+
+RESPONSIBILITIES (if the form has a separate Responsibilities box)
+
+Intrising Networks:
+- Develop and maintain frontend features for three products: the switch web UI (AngularJS), AutoPVT (Vue 3) and InTriHub (Vue 2).
+- Build and maintain backend services and APIs in Go and gRPC on top of PostgreSQL for AutoPVT and the switch management interface.
+- Own authentication and session security features for the switch management interface, including multi-factor login and session limits, in line with the IEC 62443 standard.
+- Maintain InTriHub's Firebase database, access rules and cloud functions, and keep its cloud costs under control.
+- Diagnose and fix performance and concurrency problems across the frontend, backend and database.
+- Maintain the web UI's build tooling and CI pipeline.
+- Coordinate with the firmware and backend engineers on the points where their code connects to mine.
+
+Texim Europe B.V.:
+- Design and build a C# desktop application to replace the company's discontinued data-transfer tool.
+- Build the scheduling and background job execution that runs the company's scripts automatically.
+- Make sure the existing VBScript library kept running unchanged on the new platform.
+- Migrate the company's full set of scripts onto the new platform.

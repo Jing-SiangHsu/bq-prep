@@ -231,7 +231,7 @@ Reduced CI build time by over 80% through scoping asset compilation to per-produ
 ### IH-1: Firebase cost optimization
 
 **Bullet:**
-Cut Firebase costs from $300/month to within Firebase's free tier by tracing the spike to a 70 MB firmware collection inflated by an embedded log field and 4 redundant per-page listeners re-fetching it on every navigation, restructuring it into a lazy-loaded sibling node (70 MB to 5 MB, 93% reduction) and consolidating to one global Vuex listener.
+Cut Firebase costs from $300/month to within Firebase's free tier by tracing the spike to a 70 MB firmware collection inflated by an embedded log field and 3 redundant per-page listeners re-fetching it on every navigation, restructuring it into a lazy-loaded sibling node (70 MB to 5 MB, 93% reduction) and consolidating to one global Vuex listener.
 
 **Sources:**
 - Issue: test-cloud#77 — https://github.com/Intrising/test-cloud/issues/77 ("Data Retrieval Optimization & Migration")
@@ -270,6 +270,22 @@ Cut Firebase costs from $300/month to within Firebase's free tier by tracing the
 - Bullet says "70 MB" — actual measurements 64–65 MB total with ~60 MB internalLog. 70 MB is a rounded figure.
 - "93% reduction" math: 65 MB − 60 MB log ≈ 5 MB metadata; 60/65 ≈ 92%. Rounded to 93%.
 - Fix deployed April 2026; billing shows free tier in May 2026 cycle.
+
+---
+
+### IH-2: Access-control fix (multi-tenant partner data isolation)
+
+**Bullet:**
+Fixed an access-control gap on InTriHub, a multi-tenant portal used by real external partner companies with per-partner data isolation, where an internal firmware log was exposed to non-admin roles instead of staying admin-only.
+
+**Sources:**
+- `8e9d5c6` — 2026-04-27 (hub-cloud-function) — tightened RTDB rules: `firmwareInternalLog` read restricted to admin only (was leaking to vendor/salesperson/partner via the firmware node)
+- `database.rules.json` + a real RTDB data export (`lantechhub-export.json`) — confirms genuine per-partner row-level isolation: user records carry a `custom` field (e.g. `custom: "optigo"` for vendor_login@optigo.net, `custom: "lantech"` for eu@lantechcom.tw) vs. internal admins with `custom: "all"`; RTDB rules gate reads on matching the requesting user's own `custom` value.
+
+**Interview notes:**
+- Same underlying data model as IH-1 (the `internalLog`/`firmwareInternalLog` field), a separate concern: IH-1 fixed unnecessary size/cost, IH-2 fixed who could read it once split out.
+- Scope: fixed the bug inside an existing tenant/role system, did not design the multi-tenant architecture itself (that predates this fix).
+- "Non-admin roles" is the precise framing — the bug was role-based over-exposure (vendor/salesperson/partner roles could all read an admin-only field), not cross-tenant leakage (one partner seeing another partner's data). Don't conflate the two in an interview.
 
 ---
 
