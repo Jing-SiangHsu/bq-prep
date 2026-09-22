@@ -16,7 +16,7 @@ Loading the 2,500-item test catalog took 3 to 5 seconds, and about 30 engineers 
 
 ## 3. Switch Management Interface: IEC 62443 session limits and MFA
 
-Our switch products had to meet IEC 62443-4-2 Security Level 3, and I led the authentication and session control requirements across four product lines, on the gateway and web UI side. That meant adding TOTP-based MFA and limiting concurrent sessions per user and per interface across web, CLI, and Telnet. Since CLI and Telnet log in through PAM in the core firmware, I designed an RPC in the gateway that the firmware calls after a successful login, which makes the gateway the single source of truth for sessions. All four product lines met SL3 on those requirements.
+Our switch products had to meet IEC 62443-4-2 Security Level 3, and I led the authentication and session control requirements across four product lines, on the gateway and web UI side. That meant adding TOTP-based MFA and limiting concurrent sessions per user and per interface across web, CLI, and Telnet. Since CLI and Telnet log in through PAM in the core firmware, I designed an RPC in the gateway that the firmware calls after a successful login, which makes the gateway the single source of truth for sessions. The SL3 effort is still in progress, and those requirements are implemented across all four product lines.
 
 ## 4. Switch Management Interface: two-RPC login protocol
 

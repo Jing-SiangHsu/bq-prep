@@ -148,7 +148,7 @@ I led the session control and authentication requirements across four product li
 CR 2.5 requires per-user per-interface session limits across all login paths. The web path was natural: my gateway already controls JWT-based sessions, so I added a per-user per-interface counter and enforced the limit at JWT issuance. For CLI and Telnet, those authenticate via PAM in the core firmware. I designed a CheckSessionLimit RPC in the gateway's InternalService: IS-Roger's auth code calls this after a successful PAM login to both record the new session and check if the limit is exceeded. The gateway becomes the single authoritative session store across all three interfaces. I also implemented proactive termination: when an admin disables a user's interface access, the gateway immediately invalidates existing JWTs. This works via a stateful JWT pattern: every issued JWT gets a `jti` claim, and the gateway keeps an in-memory map of all active sessions keyed by `jti`. Every authenticated request calls `CheckToken`, which only passes if that `jti` exists with state active. To invalidate, `RuinToken` flips the state flag. The JWT signature is still cryptographically valid, but the state check rejects it on the next request. Tradeoff: the session map lives in memory, so a gateway restart logs everyone out.
 
 **R — Result:**
-Four product lines achieved IEC 62443-4-2 SL3 compliance on session control and authentication. Session limits are enforced in real time across all login paths from one source of truth.
+The session control and authentication requirements are implemented across four product lines, as part of an SL3 effort that is still in progress. Session limits are enforced in real time across all login paths from one source of truth.
 
 **Probes:**
 

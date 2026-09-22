@@ -66,7 +66,7 @@ I led the session control and authentication requirements across four product li
 CR 2.5 requires per-user per-interface session limits across all login paths. The web path was natural: my gateway already controls JWT-based sessions, so I added a per-user per-interface counter and enforced the limit at JWT issuance. For CLI and Telnet, which authenticate via PAM in the core firmware, I designed a `CheckSessionLimit` RPC in the gateway's InternalService that the firmware's auth code calls after a successful PAM login, making the gateway the single authoritative session store across all three interfaces. I also implemented proactive termination: when an admin disables a user's interface access, the gateway immediately invalidates existing JWTs via a stateful `jti`-keyed session map, checked on every request and flipped on invalidation.
 
 **R — Result:**
-Four product lines achieved IEC 62443-4-2 SL3 compliance on session control and authentication. Session limits are enforced in real time across all login paths from one source of truth.
+The session control and authentication requirements are implemented across four product lines, as part of an SL3 effort that is still in progress. Session limits are enforced in real time across all login paths from one source of truth.
 
 **Probes:**
 - *"What was your scope within IEC 62443?"* CR 1.1 (TOTP MFA) and CR 2.5 (session limits). Other requirements were already implemented or handled by other engineers.
